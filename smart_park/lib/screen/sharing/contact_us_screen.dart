@@ -19,14 +19,14 @@ class ContactUsScreen extends StatelessWidget {
         title: Text(
           'Contact Us'.tr,
           style: const TextStyle(
-            color: Colors.white,
+              color: Color(0xFF0B1F45),
             fontWeight: FontWeight.w700,
           ),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: const Color(0xFF0B1F45)),
       ),
       body: Container(
         width: double.infinity,
@@ -34,9 +34,9 @@ class ContactUsScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0F2027),
-              Color(0xFF203A43),
-              Color(0xFF2C5364),
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -53,21 +53,22 @@ class ContactUsScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: EdgeInsets.all(w * 0.055),
                     decoration: BoxDecoration(
+        color: Colors.white,
                       borderRadius: BorderRadius.circular(28),
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
                           const Color(0xFF2EC4B6).withOpacity(0.22),
-                          Colors.white.withOpacity(0.08),
+                          const Color(0xFFE2E7F0),
                         ],
                       ),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.14),
+                        color: const Color(0xFFE2E7F0),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.18),
+                          color: const Color(0xFF0B1F45).withOpacity(0.05),
                           blurRadius: 18,
                           offset: const Offset(0, 10),
                         ),
@@ -97,7 +98,7 @@ class ContactUsScreen extends StatelessWidget {
                               Text(
                                 'We are here to help'.tr,
                                 style: theme.textTheme.titleLarge?.copyWith(
-                                  color: Colors.white,
+                                  color: const Color(0xFF0B1F45),
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
@@ -105,7 +106,7 @@ class ContactUsScreen extends StatelessWidget {
                               Text(
                                 'Send us your question, issue, or suggestion and we will get back to you.'.tr,
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.76),
+              color: Color(0xFF5C6B82),
                                   fontSize: 14,
                                   height: 1.5,
                                 ),
@@ -121,14 +122,14 @@ class ContactUsScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: EdgeInsets.all(w * 0.05),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(28),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.10),
+                        color: const Color(0xFFE2E7F0),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
+                          color: const Color(0xFF0B1F45).withOpacity(0.05),
                           blurRadius: 16,
                           offset: const Offset(0, 8),
                         ),
@@ -175,7 +176,7 @@ class ContactUsScreen extends StatelessWidget {
                                   : controller.sendMessage,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF2EC4B6),
-                                foregroundColor: Colors.white,
+                                foregroundColor: const Color(0xFF0B1F45),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18),
                                 ),
@@ -186,7 +187,7 @@ class ContactUsScreen extends StatelessWidget {
                                 height: 20,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2.5,
-                                  color: Colors.white,
+                                  color: const Color(0xFF0B1F45),
                                 ),
                               )
                                   : const Icon(Icons.send_rounded),
@@ -210,10 +211,10 @@ class ContactUsScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: EdgeInsets.all(w * 0.045),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.06),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.08),
+                        color: const Color(0xFFE2E7F0),
                       ),
                     ),
                     child: Row(
@@ -227,7 +228,7 @@ class ContactUsScreen extends StatelessWidget {
                           child: Text(
                             'Our support team reviews messages as soon as possible.'.tr,
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.78),
+              color: Color(0xFF5C6B82),
                               fontSize: 13,
                               height: 1.4,
                             ),
@@ -264,13 +265,15 @@ class ContactUsScreen extends StatelessWidget {
           }
           return null;
         },
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(
+              color: Color(0xFF0B1F45)),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Colors.white.withOpacity(0.75)),
+          labelStyle: TextStyle(
+              color: Color(0xFF5C6B82)),
           prefixIcon: Icon(icon, color: const Color(0xFF2EC4B6)),
           filled: true,
-          fillColor: Colors.white.withOpacity(0.06),
+          fillColor: const Color(0xFFF5F7FB),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
@@ -278,7 +281,7 @@ class ContactUsScreen extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide(
-              color: Colors.white.withOpacity(0.08),
+              color: const Color(0xFFE2E7F0),
             ),
           ),
           focusedBorder: OutlineInputBorder(

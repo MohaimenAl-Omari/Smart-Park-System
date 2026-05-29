@@ -3,16 +3,71 @@
 namespace App\Http\Controllers;
 
 use App\Models\Garage;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class GarageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $garages = Garage::where('is_approved', 1)->get();
+        $query = Garage::with('images')->where('is_approved', 1);
+
+        if ($request->filled('city') && strtolower($request->city) !== 'all') {
+            $query->where('city', $request->city);
+        }
+
+        if ($request->filled('search')) {
+            $search = '%' . $request->search . '%';
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', $search)
+                    ->orWhere('address', 'LIKE', $search)
+                    ->orWhere('description', 'LIKE', $search);
+            });
+        }
+
+        $garages = $query->orderByDesc('is_active')->orderBy('name')->get()
+            ->map(function (Garage $garage) {
+                $garage->average_rating = Rating::averageForGarage($garage->id);
+                $garage->ratings_count = Rating::countForGarage($garage->id);
+                $garage->available_spots = $garage->capacity;
+                return $garage;
+            });
+
         return response()->json([
-            'garages' => $garages
+            'garages' => $garages,
         ], 200);
+    }
+
+    public function show($id)
+    {
+        $garage = Garage::with(['images', 'services', 'ratings.user:id,name'])->find($id);
+
+        if (!$garage) {
+            return response()->json(['message' => 'Garage not found'], 404);
+        }
+
+        return response()->json([
+            'garage' => $garage,
+            'average_rating' => Rating::averageForGarage($garage->id),
+            'ratings_count' => Rating::countForGarage($garage->id),
+            'available_spots' => $garage->capacity,
+        ]);
+    }
+
+    public function availability($id)
+    {
+        $garage = Garage::find($id);
+
+        if (!$garage) {
+            return response()->json(['message' => 'Garage not found'], 404);
+        }
+
+        return response()->json([
+            'garage_id' => $garage->id,
+            'available_spots' => $garage->capacity,
+            'capacity' => $garage->capacity,
+            'is_active' => $garage->is_active,
+        ]);
     }
     public function store(Request $request)
     {

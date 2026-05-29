@@ -20,14 +20,14 @@ class UpdateAvailabilityScreen extends StatelessWidget {
         title: Text(
           'Update Availability'.tr,
           style: const TextStyle(
-            color: Colors.white,
+              color: Color(0xFF0B1F45),
             fontWeight: FontWeight.w700,
           ),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: const Color(0xFF0B1F45)),
       ),
       body: Container(
         width: double.infinity,
@@ -35,9 +35,9 @@ class UpdateAvailabilityScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0F2027),
-              Color(0xFF203A43),
-              Color(0xFF2C5364),
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -59,25 +59,32 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(w * 0.06),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.10),
+                      color: const Color(0xFFE2E7F0),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF0B1F45).withOpacity(0.05),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.lock_outline_rounded,
-                        color: Colors.white,
+                        color: const Color(0xFF0B1F45),
                         size: 50,
                       ),
                       SizedBox(height: h * 0.02),
                       Text(
                         'Access Denied'.tr,
                         style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
+                          color: const Color(0xFF0B1F45),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -86,7 +93,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                         controller.errorMessage.value,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.75),
+              color: Color(0xFF5C6B82),
                           fontSize: 15,
                         ),
                       ),
@@ -104,25 +111,32 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(w * 0.06),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.10),
+                      color: const Color(0xFFE2E7F0),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF0B1F45).withOpacity(0.05),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.garage_outlined,
-                        color: Colors.white,
+                        color: const Color(0xFF0B1F45),
                         size: 50,
                       ),
                       SizedBox(height: h * 0.02),
                       Text(
                         'No Garage Found'.tr,
                         style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
+                          color: const Color(0xFF0B1F45),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -133,7 +147,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                             : controller.errorMessage.value,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.75),
+              color: Color(0xFF5C6B82),
                           fontSize: 15,
                         ),
                       ),
@@ -153,14 +167,14 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.all(w * 0.05),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(28),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.10),
+                      color: const Color(0xFFE2E7F0),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
+                        color: const Color(0xFF0B1F45).withOpacity(0.05),
                         blurRadius: 16,
                         offset: const Offset(0, 8),
                       ),
@@ -172,7 +186,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                       Text(
                         'Garage Availability'.tr,
                         style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
+                          color: const Color(0xFF0B1F45),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -180,7 +194,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                       Text(
                         'Update your current available parking spots and garage status'.tr,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.72),
+              color: Color(0xFF5C6B82),
                           fontSize: 14,
                         ),
                       ),
@@ -211,7 +225,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                                   Text(
                                     'Garage Capacity'.tr,
                                     style: TextStyle(
-                                      color: Colors.white.withOpacity(0.75),
+              color: Color(0xFF5C6B82),
                                       fontSize: 13,
                                     ),
                                   ),
@@ -220,7 +234,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                                         () => Text(
                                       '${controller.capacity.value}',
                                       style: const TextStyle(
-                                        color: Colors.white,
+              color: Color(0xFF0B1F45),
                                         fontSize: 22,
                                         fontWeight: FontWeight.w800,
                                       ),
@@ -258,18 +272,19 @@ class UpdateAvailabilityScreen extends StatelessWidget {
 
                           return null;
                         },
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(
+              color: Color(0xFF0B1F45)),
                         decoration: InputDecoration(
                           labelText: 'Available Spots'.tr,
                           labelStyle: TextStyle(
-                            color: Colors.white.withOpacity(0.75),
+              color: Color(0xFF5C6B82),
                           ),
                           prefixIcon: const Icon(
                             Icons.event_available_outlined,
                             color: Color(0xFF2EC4B6),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.06),
+                          fillColor: const Color(0xFFF5F7FB),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none,
@@ -277,7 +292,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide(
-                              color: Colors.white.withOpacity(0.08),
+                              color: const Color(0xFFE2E7F0),
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -306,10 +321,10 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                           vertical: h * 0.012,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.06),
+                          color: const Color(0xFFF5F7FB),
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.08),
+                            color: const Color(0xFFE2E7F0),
                           ),
                         ),
                         child: Row(
@@ -323,7 +338,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                               child: Text(
                                 'Garage Active'.tr,
                                 style: const TextStyle(
-                                  color: Colors.white,
+              color: Color(0xFF0B1F45),
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -353,7 +368,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                                 : controller.updateAvailability,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF2EC4B6),
-                              foregroundColor: Colors.white,
+                              foregroundColor: const Color(0xFF0B1F45),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
@@ -364,7 +379,7 @@ class UpdateAvailabilityScreen extends StatelessWidget {
                               height: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
-                                color: Colors.white,
+                                color: const Color(0xFF0B1F45),
                               ),
                             )
                                 : const Icon(Icons.save_outlined),

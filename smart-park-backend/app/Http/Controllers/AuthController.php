@@ -17,7 +17,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'role' => 'required|in:car_owner,garage_owner',
             'car_type' => 'required_if:role,car_owner|nullable|string|max:255',
-            'mobile' => 'required|string|max:10'
+            'phone' => 'required|string|max:15'
         ]);
         $user = User::registerUser($validated);
         $token = $user->createToken('api-token')->plainTextToken;

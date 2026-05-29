@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../controller/reservation_controller.dart';
 import '../../models/reservation_model.dart';
+import 'rate_garage_dialog.dart';
+import 'report_garage_screen.dart';
 
 class MyReservationsScreen extends StatelessWidget {
   MyReservationsScreen({super.key});
@@ -14,17 +16,17 @@ class MyReservationsScreen extends StatelessWidget {
   Color _statusColor(String status) {
     switch (status.toLowerCase()) {
       case 'accepted':
-        return Colors.greenAccent;
+        return Colors.green;
       case 'pending':
-        return Colors.orangeAccent;
+        return Colors.orange;
       case 'rejected':
         return Colors.redAccent;
       case 'cancelled':
         return Colors.grey;
       case 'completed':
-        return Colors.blueAccent;
+        return const Color(0xFF2EC4B6);
       default:
-        return Colors.white70;
+        return const Color(0xFF5C6B82);
     }
   }
 
@@ -54,7 +56,8 @@ class MyReservationsScreen extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(color: Colors.white70),
+            style: const TextStyle(
+              color: Color(0xFF5C6B82)),
           ),
         ),
       ],
@@ -70,19 +73,14 @@ class MyReservationsScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        gradient: LinearGradient(
-          colors: [
-            Colors.white.withOpacity(0.15),
-            Colors.white.withOpacity(0.05),
-          ],
-        ),
         border: Border.all(
-          color: Colors.white.withOpacity(0.15),
+          color: const Color(0xFFE2E7F0),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: const Color(0xFF0B1F45).withOpacity(0.05),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -98,7 +96,7 @@ class MyReservationsScreen extends StatelessWidget {
                 child: Text(
                   item.garageName,
                   style: const TextStyle(
-                    color: Colors.white,
+              color: Color(0xFF0B1F45),
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
                   ),
@@ -140,8 +138,14 @@ class MyReservationsScreen extends StatelessWidget {
 
           _infoRow(
             Icons.monetization_on_outlined,
-            "${'total_cost'.tr}: ${item.totalCost ?? 0}",
+            "${'total_cost'.tr}: ${item.totalCost ?? 0} JOD",
           ),
+          if (item.garageOwnerPhone != null &&
+              item.garageOwnerPhone!.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            _infoRow(Icons.phone_outlined,
+                "${'garage_owner_phone'.tr}: ${item.garageOwnerPhone!}"),
+          ],
 
           /// 🔸 Cancel Reason
           if (item.cancelReason != null &&
@@ -159,90 +163,199 @@ class MyReservationsScreen extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               "${'owner_note'.tr}: ${item.ownerResponseNote}",
-              style: const TextStyle(color: Colors.white70),
+              style: const TextStyle(
+              color: Color(0xFF5C6B82)),
             ),
           ],
 
-          /// 🔻 Cancel Button
-          if (showCancel &&
-              (item.status == 'pending' ||
-                  item.status == 'accepted')) ...[
-            const SizedBox(height: 14),
-            Align(
-              alignment: Alignment.centerRight,
-              child: InkWell(
-                onTap: () {
-                  Get.defaultDialog(
-                    backgroundColor: const Color(0xFF203A43),
-                    title: 'cancel_reservation'.tr,
-                    titleStyle: const TextStyle(color: Colors.white),
-                    content: Column(
-                      children: [
-                        TextField(
-                          controller:
-                          controller.cancelReasonController,
-                          style: const TextStyle(color: Colors.white),
-                          maxLines: 3,
-                          decoration: InputDecoration(
-                            hintText:
-                            'enter_cancel_reason_optional'.tr,
-                            hintStyle:
-                            const TextStyle(color: Colors.white54),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.white.withOpacity(0.2)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    textCancel: 'close'.tr,
-                    textConfirm: 'confirm'.tr,
-                    confirmTextColor: Colors.white,
-                    onConfirm: () async {
-                      Get.back();
-                      await controller
-                          .cancelReservation(item.id);
-                    },
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    'cancel_reservation'.tr,
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontWeight: FontWeight.bold,
+          /// 🔻 Action buttons row (Check-in / Cancel / Rate / Report)
+          const SizedBox(height: 14),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              if (showCancel && item.canCheckIn)
+                _actionChip(
+                  icon: Icons.login_rounded,
+                  label: 'check_in'.tr,
+                  color: const Color(0xFF2EC4B6),
+                  onTap: () => controller.checkInReservation(item.id),
+                ),
+              if (showCancel && item.canCheckOut)
+                _actionChip(
+                  icon: Icons.logout_rounded,
+                  label: 'check_out'.tr,
+                  color: const Color(0xFF2EC4B6),
+                  onTap: () => controller.checkOutReservation(item.id),
+                ),
+              if (showCancel && item.canCancel)
+                _actionChip(
+                  icon: Icons.cancel_outlined,
+                  label: 'cancel_reservation'.tr,
+                  color: Colors.redAccent,
+                  onTap: () => _showCancelDialog(item),
+                ),
+              if (showCancel &&
+                  !item.canCancel &&
+                  (item.status == 'pending' ||
+                      item.status == 'accepted')) ...[
+                _hintChip(
+                  icon: Icons.info_outline,
+                  label: 'cancel_window_closed'.tr,
+                ),
+              ],
+              if (item.canRate)
+                _actionChip(
+                  icon: Icons.star_rounded,
+                  label: 'rate_garage'.tr,
+                  color: const Color(0xFFFFC107),
+                  onTap: () => Get.dialog(
+                    RateGarageDialog(
+                      garageId: item.garageId,
+                      reservationId: item.id,
+                      garageName: item.garageName,
+                      onSubmitted: () {
+                        controller.fetchPreviousReservations();
+                      },
                     ),
                   ),
                 ),
-              ),
-            ),
-          ],
+              if (item.status != 'rejected' && item.status != 'cancelled')
+                _actionChip(
+                  icon: Icons.flag_outlined,
+                  label: 'report_garage'.tr,
+                  color: const Color(0xFF5C6B82),
+                  onTap: () => Get.to(() => ReportGarageScreen(
+                        garageId: item.garageId,
+                        garageName: item.garageName,
+                      )),
+                ),
+            ],
+          ),
         ],
       ),
     );
   }
 
+  Widget _actionChip({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.15),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: color.withOpacity(0.35)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: color, size: 16),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _hintChip({required IconData icon, required String label}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE2E7F0),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E7F0)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: const Color(0xFF5C6B82), size: 16),
+          const SizedBox(width: 6),
+          Text(label,
+              style: const TextStyle(
+              color: Color(0xFF5C6B82), fontWeight: FontWeight.w600)),
+        ],
+      ),
+    );
+  }
+
+  void _showCancelDialog(ReservationModel item) {
+    Get.defaultDialog(
+      backgroundColor: Colors.white,
+      title: 'cancel_reservation'.tr,
+      titleStyle: const TextStyle(
+              color: Color(0xFF0B1F45)),
+      content: Column(
+        children: [
+          TextField(
+            controller: controller.cancelReasonController,
+            style: const TextStyle(
+              color: Color(0xFF0B1F45)),
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: 'enter_cancel_reason_optional'.tr,
+              hintStyle: const TextStyle(
+              color: Color(0xFF5C6B82)),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Color(0xFFE2E7F0)),
+              ),
+            ),
+          ),
+        ],
+      ),
+      textCancel: 'close'.tr,
+      textConfirm: 'confirm'.tr,
+      confirmTextColor: Colors.white,
+      onConfirm: () async {
+        Get.back();
+        await controller.cancelReservation(item.id);
+      },
+    );
+  }
+
   Widget _emptyState(String text) {
     return Center(
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white54),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: const Color(0xFF2EC4B6).withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.event_note_outlined,
+              color: Color(0xFF2EC4B6),
+              size: 48,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            text,
+            style: const TextStyle(
+              color: Color(0xFF0B1F45),
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchUpcomingReservations();
-    controller.fetchPreviousReservations();
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -251,14 +364,15 @@ class MyReservationsScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            icon: const Icon(Icons.arrow_back, color: const Color(0xFF0B1F45)),
             onPressed: () {
               Get.back();
             },
           ),
           title: Text(
             'my_reservations'.tr,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(
+              color: Color(0xFF0B1F45)),
           ),
         ),
 
@@ -266,9 +380,9 @@ class MyReservationsScreen extends StatelessWidget {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF0F2027),
-                Color(0xFF203A43),
-                Color(0xFF2C5364),
+                Color(0xFFF5F7FB),
+                Colors.white,
+                Color(0xFFEFF3F8),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -279,7 +393,8 @@ class MyReservationsScreen extends StatelessWidget {
               children: [
                 TabBar(
                   indicatorColor: accentColor,
-                  labelColor: Colors.white,
+                  labelColor: const Color(0xFF0B1F45),
+                  unselectedLabelColor: const Color(0xFF5C6B82),
                   tabs: [
                     Tab(text: 'upcoming'.tr),
                     Tab(text: 'previous'.tr),
@@ -289,43 +404,78 @@ class MyReservationsScreen extends StatelessWidget {
                 Expanded(
                   child: Obx(() {
                     if (controller.isLoading.value) {
-                      return const Center(
-                          child: CircularProgressIndicator());
+                      return Center(
+                          child: CircularProgressIndicator(color: accentColor));
                     }
 
                     return TabBarView(
                       children: [
-                        controller.upcomingReservations.isEmpty
-                            ? _emptyState(
-                            'no_upcoming_reservations'.tr)
-                            : ListView.builder(
-                          padding: const EdgeInsets.all(16),
-                          itemCount: controller
-                              .upcomingReservations.length,
-                          itemBuilder: (context, index) {
-                            final item = controller
-                                .upcomingReservations[index];
-                            return _reservationCard(
-                              context,
-                              item,
-                              showCancel: true,
-                            );
+                        RefreshIndicator(
+                          color: accentColor,
+                          onRefresh: () async {
+                            await controller.fetchUpcomingReservations();
                           },
+                          child: controller.upcomingReservations.isEmpty
+                              ? LayoutBuilder(
+                                  builder: (ctx, constraints) =>
+                                      SingleChildScrollView(
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    child: SizedBox(
+                                      height: constraints.maxHeight,
+                                      child: _emptyState(
+                                          'no_upcoming_reservations'.tr),
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  padding: const EdgeInsets.all(16),
+                                  itemCount:
+                                      controller.upcomingReservations.length,
+                                  itemBuilder: (context, index) {
+                                    final item = controller
+                                        .upcomingReservations[index];
+                                    return _reservationCard(
+                                      context,
+                                      item,
+                                      showCancel: true,
+                                    );
+                                  },
+                                ),
                         ),
 
-                        controller.previousReservations.isEmpty
-                            ? _emptyState(
-                            'no_previous_reservations'.tr)
-                            : ListView.builder(
-                          padding: const EdgeInsets.all(16),
-                          itemCount: controller
-                              .previousReservations.length,
-                          itemBuilder: (context, index) {
-                            final item = controller
-                                .previousReservations[index];
-                            return _reservationCard(
-                                context, item);
+                        RefreshIndicator(
+                          color: accentColor,
+                          onRefresh: () async {
+                            await controller.fetchPreviousReservations();
                           },
+                          child: controller.previousReservations.isEmpty
+                              ? LayoutBuilder(
+                                  builder: (ctx, constraints) =>
+                                      SingleChildScrollView(
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    child: SizedBox(
+                                      height: constraints.maxHeight,
+                                      child: _emptyState(
+                                          'no_previous_reservations'.tr),
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  padding: const EdgeInsets.all(16),
+                                  itemCount:
+                                      controller.previousReservations.length,
+                                  itemBuilder: (context, index) {
+                                    final item = controller
+                                        .previousReservations[index];
+                                    return _reservationCard(context, item);
+                                  },
+                                ),
                         ),
                       ],
                     );

@@ -14,42 +14,22 @@ class RoleSelectionScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF06152E),
-                  Color(0xFF0B1F45),
-                  Color(0xFF0C3D68),
-                ],
-              ),
-            ),
+      backgroundColor: const Color(0xFFF5F7FB),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
+            ],
           ),
-          Positioned(
-            top: -h * 0.08,
-            right: -w * 0.12,
-            child: _GlowCircle(
-              size: w * 0.5,
-              color: const Color(0xFF2EC4B6),
-              opacity: 0.16,
-            ),
-          ),
-          Positioned(
-            bottom: -h * 0.07,
-            left: -w * 0.08,
-            child: _GlowCircle(
-              size: w * 0.56,
-              color: const Color(0xFF00D4FF),
-              opacity: 0.1,
-            ),
-          ),
-          SafeArea(
+        ),
+        child: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: w * 0.06),
               child: Column(
@@ -59,6 +39,7 @@ class RoleSelectionScreen extends StatelessWidget {
                     width: w * 0.2 > 82 ? 82 : w * 0.2,
                     height: w * 0.2 > 82 ? 82 : w * 0.2,
                     decoration: BoxDecoration(
+        color: Colors.white,
                       borderRadius: BorderRadius.circular(w * 0.06),
                       gradient: const LinearGradient(
                         begin: Alignment.topLeft,
@@ -70,7 +51,7 @@ class RoleSelectionScreen extends StatelessWidget {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.24),
+                          color: const Color(0xFF0B1F45).withOpacity(0.05),
                           blurRadius: 26,
                           offset: Offset(0, h * 0.014),
                         ),
@@ -78,7 +59,7 @@ class RoleSelectionScreen extends StatelessWidget {
                     ),
                     child: Icon(
                       Icons.local_parking_rounded,
-                      color: Colors.white,
+                      color: const Color(0xFF0B1F45),
                       size: w * 0.1,
                     ),
                   ),
@@ -87,7 +68,7 @@ class RoleSelectionScreen extends StatelessWidget {
                     'Choose Your Role'.tr,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
+                      color: const Color(0xFF0B1F45),
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -96,7 +77,7 @@ class RoleSelectionScreen extends StatelessWidget {
                     'Select how you want to use Smart Park.'.tr,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: Colors.white.withOpacity(0.76),
+                      color: const Color(0xFF5C6B82),
                       height: 1.5,
                     ),
                   ),
@@ -126,7 +107,7 @@ class RoleSelectionScreen extends StatelessWidget {
                     child: Text(
                       'Already have an account? Login'.tr,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.92),
+              color: Color(0xFF5C6B82),
                         fontWeight: FontWeight.w700,
                         fontSize: w * 0.038 > 16 ? 16 : w * 0.038,
                       ),
@@ -137,9 +118,9 @@ class RoleSelectionScreen extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      )
+    ;
   }
 }
 
@@ -172,16 +153,16 @@ class _RoleCard extends StatelessWidget {
           vertical: h * 0.025,
         ),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(w * 0.05),
           border: Border.all(
-            color: Colors.white.withOpacity(0.14),
+            color: const Color(0xFFE2E7F0),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 24,
-              offset: Offset(0, h * 0.012),
+              color: const Color(0xFF0B1F45).withOpacity(0.06),
+              blurRadius: 18,
+              offset: Offset(0, h * 0.008),
             ),
           ],
         ),
@@ -201,7 +182,7 @@ class _RoleCard extends StatelessWidget {
               ),
               child: Icon(
                 icon,
-                color: Colors.white,
+                color: const Color(0xFF0B1F45),
                 size: w * 0.08,
               ),
             ),
@@ -213,7 +194,7 @@ class _RoleCard extends StatelessWidget {
                   Text(
                     title,
                     style: theme.textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
+                      color: const Color(0xFF0B1F45),
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -221,7 +202,7 @@ class _RoleCard extends StatelessWidget {
                   Text(
                     subtitle,
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: Colors.white.withOpacity(0.75),
+                      color: const Color(0xFF5C6B82),
                       height: 1.45,
                     ),
                   ),
@@ -231,7 +212,7 @@ class _RoleCard extends StatelessWidget {
             SizedBox(width: w * 0.02),
             Icon(
               Icons.arrow_forward_ios_rounded,
-              color: Colors.white.withOpacity(0.8),
+              color: const Color(0xFF5C6B82),
               size: w * 0.045,
             ),
           ],

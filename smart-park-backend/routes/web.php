@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminGarageController;
 use App\Http\Controllers\Admin\AdminContactController;
+use App\Http\Controllers\Admin\AdminReportController;
 use App\Http\Controllers\Admin\AdminReservationController;
 
 Route::get('/admin', [AdminAuthController::class, 'showLogin']);
@@ -27,6 +28,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/contact-messages/{id}/replied', [AdminContactController::class, 'markReplied'])->name('admin.contact.replied');
     Route::delete('/contact-messages/{id}', [AdminContactController::class, 'delete'])->name('admin.contact.delete');
     Route::get('/reservations', [AdminReservationController::class, 'index'])->name('admin.reservations.index');
+
+    // Garage reports (complaints)
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('admin.reports.index');
+    Route::post('/reports/{id}/reviewed', [AdminReportController::class, 'markReviewed'])->name('admin.reports.reviewed');
+    Route::post('/reports/{id}/resolved', [AdminReportController::class, 'markResolved'])->name('admin.reports.resolved');
+    Route::delete('/reports/{id}', [AdminReportController::class, 'delete'])->name('admin.reports.delete');
 
     Route::get('/admin/garage-owners/create', [AdminUserController::class, 'createGarageOwner'])->name('admin.garageOwners.create');
     Route::post('/admin/garage-owners/store', [AdminUserController::class, 'storeGarageOwner'])->name('admin.garageOwners.store');

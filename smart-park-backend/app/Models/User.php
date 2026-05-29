@@ -18,7 +18,10 @@ class User extends Authenticatable
         'password',
         'role',
         'car_type',
+        'phone',
         'approval_status',
+        'is_active',
+        'fcm_token',
     ];
 
     protected $hidden = [
@@ -44,7 +47,8 @@ class User extends Authenticatable
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
-            'car_type' => $data['role'] === 'car_owner' ? $data['car_type'] : null,
+            'car_type' => $data['role'] === 'car_owner' ? ($data['car_type'] ?? null) : null,
+            'phone' => $data['phone'] ?? null,
             'approval_status' => $approvalStatus,
             'is_active' => $isActive,
         ]);

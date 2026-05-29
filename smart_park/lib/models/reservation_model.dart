@@ -13,6 +13,9 @@ class ReservationModel {
   final String? ownerResponseNote;
   final String garageName;
   final String? garageLocation;
+  final String? checkedInAt;
+  final String? checkedOutAt;
+  final String? garageOwnerPhone;
 
   ReservationModel({
     required this.id,
@@ -29,6 +32,9 @@ class ReservationModel {
     this.ownerResponseNote,
     required this.garageName,
     this.garageLocation,
+    this.checkedInAt,
+    this.checkedOutAt,
+    this.garageOwnerPhone,
   });
 
   factory ReservationModel.fromJson(Map<String, dynamic> json) {
@@ -50,7 +56,49 @@ class ReservationModel {
       cancelReason: json['cancel_reason']?.toString(),
       ownerResponseNote: json['owner_response_note']?.toString(),
       garageName: json['garage']?['name']?.toString() ?? 'Unknown Garage',
-      garageLocation: json['garage']?['location']?.toString(),
+      garageLocation: json['garage']?['address']?.toString() ??
+          json['garage']?['location']?.toString(),
+      checkedInAt: json['checked_in_at']?.toString(),
+      checkedOutAt: json['checked_out_at']?.toString(),
+      garageOwnerPhone: json['garage']?['owner']?['phone']?.toString(),
     );
   }
+
+  bool get isCheckedIn => checkedInAt != null && checkedInAt!.isNotEmpty;
+  bool get isCheckedOut => checkedOutAt != null && checkedOutAt!.isNotEmpty;
+
+  bool get canCancel {
+    if (status == 'cancelled' ||
+        status == 'completed' ||
+        status == 'rejected') {
+      return false;
+    }
+    try {
+      final start = DateTime.parse('$reservationDate $startTime');
+      return start.isAfter(DateTime.now().add(const Duration(hours: 2)));
+    } catch (_) {
+      return false;
+    }
+  }
+  bool get canCheckIn {
+    if (status != 'accepted') return false;
+    if (isCheckedIn) return false;
+    try {
+      final start = DateTime.parse('$reservationDate $startTime');
+      final end = DateTime.parse('$reservationDate $endTime');
+      final now = DateTime.now();
+      return now.isAfter(start.subtract(const Duration(minutes: 30))) &&
+          now.isBefore(end);
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool get canCheckOut {
+    if (!isCheckedIn) return false;
+    if (isCheckedOut) return false;
+    return status == 'accepted' || status == 'completed';
+  }
+
+  bool get canRate => status == 'completed';
 }

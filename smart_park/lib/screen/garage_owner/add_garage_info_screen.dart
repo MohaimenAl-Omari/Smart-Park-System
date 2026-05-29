@@ -31,6 +31,9 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
     'Jerash',
     'Karak',
     'Ajloun',
+    'Salt',
+    'Tafilah',
+    "Ma'an",
   ];
   String? _selectedCity;
   final GarageController garageController = Get.put(GarageController());
@@ -102,42 +105,22 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
     final buttonHeight = h * 0.065;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF06152E),
-                  Color(0xFF0B1F45),
-                  Color(0xFF0C3D68),
-                ],
-              ),
-            ),
+      backgroundColor: const Color(0xFFF5F7FB),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
+            ],
           ),
-          Positioned(
-            top: -h * 0.08,
-            right: -w * 0.12,
-            child: _GlowCircle(
-              size: w * 0.5,
-              color: const Color(0xFF2EC4B6),
-              opacity: 0.16,
-            ),
-          ),
-          Positioned(
-            bottom: -h * 0.08,
-            left: -w * 0.12,
-            child: _GlowCircle(
-              size: w * 0.56,
-              color: const Color(0xFF00D4FF),
-              opacity: 0.1,
-            ),
-          ),
-          SafeArea(
+        ),
+        child: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -148,6 +131,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                     width: w * 0.2 > 82 ? 82 : w * 0.2,
                     height: w * 0.2 > 82 ? 82 : w * 0.2,
                     decoration: BoxDecoration(
+        color: Colors.white,
                       borderRadius: BorderRadius.circular(w * 0.06),
                       gradient: const LinearGradient(
                         begin: Alignment.topLeft,
@@ -159,7 +143,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.24),
+                          color: const Color(0xFF0B1F45).withOpacity(0.05),
                           blurRadius: 26,
                           offset: Offset(0, h * 0.014),
                         ),
@@ -167,7 +151,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                     ),
                     child: Icon(
                       Icons.garage_rounded,
-                      color: Colors.white,
+                      color: const Color(0xFF0B1F45),
                       size: w * 0.1,
                     ),
                   ),
@@ -176,7 +160,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                     'Add Garage Information'.tr,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
+                      color: const Color(0xFF0B1F45),
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -185,7 +169,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                     'Complete your garage profile to make it visible for car owners.'.tr,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: Colors.white.withOpacity(0.75),
+                      color: const Color(0xFF5C6B82),
                       height: 1.45,
                     ),
                   ),
@@ -197,16 +181,16 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                       vertical: h * 0.025,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.10),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(cardRadius),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.14),
+                        color: const Color(0xFFE2E7F0),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          blurRadius: 28,
-                          offset: Offset(0, h * 0.015),
+                          color: const Color(0xFF0B1F45).withOpacity(0.06),
+                          blurRadius: 24,
+                          offset: Offset(0, h * 0.012),
                         ),
                       ],
                     ),
@@ -229,33 +213,34 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                           decoration: InputDecoration(
                             labelText: 'City'.tr,
                             labelStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.86),
+              color: Color(0xFF5C6B82),
                               fontWeight: FontWeight.w600,
                             ),
                             prefixIcon: Icon(
                               Icons.location_city_outlined,
-                              color: Colors.white.withOpacity(0.85),
+                              color: const Color(0xFF5C6B82),
                             ),
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.08),
+                            fillColor: const Color(0xFFF5F7FB),
                             contentPadding: EdgeInsets.symmetric(
                               horizontal: w * 0.035,
                               vertical: h * 0.018,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(w * 0.045),
-                              borderSide: BorderSide(color: Colors.white.withOpacity(0.12)),
+                              borderSide: BorderSide(color: const Color(0xFFE2E7F0)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(w * 0.045),
                               borderSide: const BorderSide(color: Color(0xFF2EC4B6), width: 1.2),
                             ),
                           ),
-                          dropdownColor: const Color(0xFF0C3D68),
+                          dropdownColor: Colors.white,
                           items: _cities.map((city) {
                             return DropdownMenuItem<String>(
                               value: city,
-                              child: Text(city, style: const TextStyle(color: Colors.white)),
+                              child: Text(city, style: const TextStyle(
+              color: Color(0xFF0B1F45))),
                             );
                           }).toList(),
                           validator: (v) => v == null || v.isEmpty ? 'City is required'.tr : null,
@@ -363,7 +348,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                                     child: Text(
                                       _errorMsg!,
                                       style: theme.textTheme.bodyMedium?.copyWith(
-                                        color: Colors.white,
+                                        color: const Color(0xFF0B1F45),
                                         height: 1.4,
                                       ),
                                     ),
@@ -378,6 +363,7 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                             height: buttonHeight,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
+        color: Colors.white,
                                 borderRadius: BorderRadius.circular(w * 0.045),
                                 gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
@@ -411,13 +397,13 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
                                   height: w * 0.06,
                                   child: const CircularProgressIndicator(
                                     strokeWidth: 2.4,
-                                    color: Colors.white,
+                                    color: const Color(0xFF0B1F45),
                                   ),
                                 )
                                     : Text(
                                   'Save Garage Information'.tr,
                                   style: TextStyle(
-                                    color: Colors.white,
+              color: Color(0xFF0B1F45),
                                     fontWeight: FontWeight.w800,
                                     fontSize: w * 0.043 > 18 ? 18 : w * 0.043,
                                   ),
@@ -434,9 +420,8 @@ class _AddGarageInfoScreenState extends State<AddGarageInfoScreen> {
               ),
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      );
   }
 }
 
@@ -471,7 +456,7 @@ class _PremiumTextField extends StatelessWidget {
       keyboardType: keyboardType,
       maxLines: maxLines,
       style: TextStyle(
-        color: Colors.white,
+              color: Color(0xFF0B1F45),
         fontSize: w * 0.038 > 16 ? 16 : w * 0.038,
         fontWeight: FontWeight.w500,
       ),
@@ -480,22 +465,22 @@ class _PremiumTextField extends StatelessWidget {
         labelText: label,
         hintText: hint,
         labelStyle: TextStyle(
-          color: Colors.white.withOpacity(0.86),
+              color: Color(0xFF5C6B82),
           fontWeight: FontWeight.w600,
         ),
-        hintStyle: TextStyle(
-          color: Colors.white.withOpacity(0.45),
+        hintStyle: const TextStyle(
+          color: Color(0xFFADB5BD),
         ),
         prefixIcon: Padding(
           padding: EdgeInsets.only(bottom: maxLines > 1 ? h * 0.06 : 0),
           child: Icon(
             prefixIcon,
-            color: Colors.white.withOpacity(0.85),
+            color: const Color(0xFF5C6B82),
             size: w * 0.055,
           ),
         ),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.08),
+        fillColor: const Color(0xFFF5F7FB),
         contentPadding: EdgeInsets.symmetric(
           horizontal: w * 0.035,
           vertical: h * 0.018,
@@ -503,7 +488,7 @@ class _PremiumTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(w * 0.045),
           borderSide: BorderSide(
-            color: Colors.white.withOpacity(0.12),
+            color: const Color(0xFFE2E7F0),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -526,7 +511,7 @@ class _PremiumTextField extends StatelessWidget {
           ),
         ),
         errorStyle: theme.textTheme.bodySmall?.copyWith(
-          color: Colors.white,
+          color: const Color(0xFF0B1F45),
           fontSize: w * 0.031 > 13 ? 13 : w * 0.031,
         ),
       ),

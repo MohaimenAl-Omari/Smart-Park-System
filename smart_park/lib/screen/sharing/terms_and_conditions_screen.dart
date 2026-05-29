@@ -72,19 +72,18 @@ class TermsAndConditionsScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
           'Terms & Conditions'.tr,
           style: const TextStyle(
-            color: Colors.white,
+            color: Color(0xFF0B1F45),
             fontWeight: FontWeight.w800,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Color(0xFF0B1F45)),
       ),
       body: Container(
         width: double.infinity,
@@ -92,9 +91,9 @@ class TermsAndConditionsScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0B1E26),
-              Color(0xFF16313B),
-              Color(0xFF224654),
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -137,21 +136,22 @@ class TermsAndConditionsScreen extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(w * 0.055),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(28),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            const Color(0xFF2EC4B6).withOpacity(0.24),
-            Colors.white.withOpacity(0.08),
+            const Color(0xFF2EC4B6).withOpacity(0.18),
+            const Color(0xFFE2E7F0),
           ],
         ),
         border: Border.all(
-          color: Colors.white.withOpacity(0.14),
+          color: const Color(0xFFE2E7F0),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.18),
+            color: const Color(0xFF0B1F45).withOpacity(0.05),
             blurRadius: 18,
             offset: const Offset(0, 10),
           ),
@@ -181,7 +181,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                 Text(
                   'Smart Park Terms'.tr,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: const Color(0xFF0B1F45),
                     fontSize: w * 0.05 > 21 ? 21 : w * 0.05,
                     fontWeight: FontWeight.w800,
                   ),
@@ -190,7 +190,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                 Text(
                   'Please read these terms carefully before using the application.'.tr,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.76),
+                    color: const Color(0xFF5C6B82),
                     fontSize: w * 0.034 > 14 ? 14 : w * 0.034,
                     height: 1.5,
                   ),
@@ -216,16 +216,16 @@ class TermsAndConditionsScreen extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(w * 0.045),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.07),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: Colors.white.withOpacity(0.10),
+            color: const Color(0xFFE2E7F0),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.10),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
+              color: const Color(0xFF0B1F45).withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -237,7 +237,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
               height: w * 0.1,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF2EC4B6).withOpacity(0.18),
+                color: const Color(0xFF2EC4B6).withOpacity(0.14),
               ),
               child: Center(
                 child: Text(
@@ -258,7 +258,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: const Color(0xFF0B1F45),
                       fontWeight: FontWeight.w800,
                       fontSize: w * 0.041 > 17 ? 17 : w * 0.041,
                     ),
@@ -267,7 +267,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                   Text(
                     content,
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.80),
+                      color: const Color(0xFF5C6B82),
                       fontSize: w * 0.033 > 14 ? 14 : w * 0.033,
                       height: 1.55,
                     ),

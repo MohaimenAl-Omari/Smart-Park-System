@@ -14,6 +14,7 @@ class StatisticsController extends GetxController {
   RxInt pending = 0.obs;
   RxInt accepted = 0.obs;
   RxInt rejected = 0.obs;
+  RxInt completed = 0.obs;
   RxDouble revenue = 0.0.obs;
   RxInt cancelled = 0.obs;
   Future<Map<String, String>> _headers() async {
@@ -40,12 +41,14 @@ class StatisticsController extends GetxController {
         pending.value = data['pending_reservations'];
         accepted.value = data['accepted_reservations'];
         rejected.value = data['rejected_reservations'];
-        cancelled.value = data['cancelled'] ?? 0;
+        cancelled.value = data['cancelled_reservations'] ?? data['cancelled'] ?? 0;
+        completed.value = data['completed_reservations'] ?? 0;
 
-        revenue.value = double.parse(data['total_revenue'].toString());
+        revenue.value = double.tryParse(data['total_revenue'].toString()) ?? 0.0;
       }
     } catch (e) {
-      Get.snackbar('error', e.toString());
+      Get.snackbar('error'.tr, 'something_went_wrong'.tr,
+          snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading.value = false;
     }

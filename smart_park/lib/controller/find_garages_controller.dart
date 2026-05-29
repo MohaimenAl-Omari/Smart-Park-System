@@ -23,6 +23,7 @@ class FindGaragesController extends GetxController {
   bool isFavorite(int garageId) {
     return favoriteGarageIds.contains(garageId);
   }
+
   final TextEditingController searchController = TextEditingController();
 
   Future<Map<String, String>> _headers() async {
@@ -38,7 +39,16 @@ class FindGaragesController extends GetxController {
     isLoading.value = true;
 
     try {
-      final url = Uri.parse('$baseUrl/garages');
+      final params = <String, String>{};
+      if (selectedCity.value.isNotEmpty && selectedCity.value != 'all') {
+        params['city'] = selectedCity.value;
+      }
+      final search = searchController.text.trim();
+      if (search.isNotEmpty) {
+        params['search'] = search;
+      }
+
+      final url = Uri.parse('$baseUrl/garages').replace(queryParameters: params);
       final response = await http.get(url, headers: await _headers());
       final data = jsonDecode(response.body);
 
@@ -79,13 +89,13 @@ class FindGaragesController extends GetxController {
 
     final results = garages.where((garage) {
       final name = garage['name']?.toString().toLowerCase() ?? '';
-      final location = garage['location']?.toString().toLowerCase() ?? '';
+      final address = garage['address']?.toString().toLowerCase() ?? '';
       final description = garage['description']?.toString().toLowerCase() ?? '';
       final city = garage['city']?.toString().toLowerCase() ?? '';
 
       final matchesSearch = query.isEmpty ||
           name.contains(query) ||
-          location.contains(query) ||
+          address.contains(query) ||
           description.contains(query);
 
       final matchesCity = cityFilter == 'all' || city == cityFilter;
@@ -118,7 +128,6 @@ class FindGaragesController extends GetxController {
           favoriteGarageIds.remove(garageId);
         }
       } else {
-        print(data);
         Get.snackbar(
           'error'.tr,
           data['message'] ?? 'something_went_wrong'.tr,
@@ -133,6 +142,7 @@ class FindGaragesController extends GetxController {
       );
     }
   }
+
   Future<void> fetchFavorites() async {
     isLoading.value = true;
     try {
@@ -159,6 +169,7 @@ class FindGaragesController extends GetxController {
       isLoading.value = false;
     }
   }
+
   @override
   void onInit() {
     fetchGarages();

@@ -19,14 +19,14 @@ class EditGarageScreen extends StatelessWidget {
         title: Text(
           'Edit Garage'.tr,
           style: const TextStyle(
-            color: Colors.white,
+              color: Color(0xFF0B1F45),
             fontWeight: FontWeight.w700,
           ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: const Color(0xFF0B1F45)),
       ),
       body: Container(
         width: double.infinity,
@@ -34,9 +34,9 @@ class EditGarageScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0F2027),
-              Color(0xFF203A43),
-              Color(0xFF2C5364),
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -58,25 +58,32 @@ class EditGarageScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(w * 0.06),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.10),
+                      color: const Color(0xFFE2E7F0),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF0B1F45).withOpacity(0.05),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.lock_outline_rounded,
-                        color: Colors.white,
+                        color: const Color(0xFF0B1F45),
                         size: 50,
                       ),
                       SizedBox(height: h * 0.02),
                       Text(
                         'Access Denied'.tr,
                         style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
+                          color: const Color(0xFF0B1F45),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -85,7 +92,7 @@ class EditGarageScreen extends StatelessWidget {
                         controller.errorMessage.value,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.75),
+              color: Color(0xFF5C6B82),
                           fontSize: 15,
                         ),
                       ),
@@ -103,25 +110,32 @@ class EditGarageScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(w * 0.06),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.10),
+                      color: const Color(0xFFE2E7F0),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF0B1F45).withOpacity(0.05),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.garage_outlined,
-                        color: Colors.white,
+                        color: const Color(0xFF0B1F45),
                         size: 50,
                       ),
                       SizedBox(height: h * 0.02),
                       Text(
                         'No Garage Found'.tr,
                         style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
+                          color: const Color(0xFF0B1F45),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -132,7 +146,7 @@ class EditGarageScreen extends StatelessWidget {
                             : controller.errorMessage.value,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.75),
+              color: Color(0xFF5C6B82),
                           fontSize: 15,
                         ),
                       ),
@@ -152,14 +166,14 @@ class EditGarageScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.all(w * 0.05),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(28),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.10),
+                      color: const Color(0xFFE2E7F0),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
+                        color: const Color(0xFF0B1F45).withOpacity(0.05),
                         blurRadius: 16,
                         offset: const Offset(0, 8),
                       ),
@@ -171,7 +185,7 @@ class EditGarageScreen extends StatelessWidget {
                       Text(
                         'Garage Information'.tr,
                         style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
+                          color: const Color(0xFF0B1F45),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -292,10 +306,10 @@ class EditGarageScreen extends StatelessWidget {
                           vertical: h * 0.012,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.06),
+                          color: const Color(0xFFF5F7FB),
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.08),
+                            color: const Color(0xFFE2E7F0),
                           ),
                         ),
                         child: Row(
@@ -309,7 +323,7 @@ class EditGarageScreen extends StatelessWidget {
                               child: Text(
                                 'Garage Active'.tr,
                                 style: const TextStyle(
-                                  color: Colors.white,
+              color: Color(0xFF0B1F45),
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -339,7 +353,7 @@ class EditGarageScreen extends StatelessWidget {
                                 : controller.updateGarage,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF2EC4B6),
-                              foregroundColor: Colors.white,
+                              foregroundColor: const Color(0xFF0B1F45),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
@@ -350,7 +364,7 @@ class EditGarageScreen extends StatelessWidget {
                               height: 20,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
-                                color: Colors.white,
+                                color: const Color(0xFF0B1F45),
                               ),
                             )
                                 : const Icon(Icons.save_outlined),
@@ -395,14 +409,14 @@ class EditGarageScreen extends StatelessWidget {
         maxLines: maxLines,
         enabled: enabled,
         style: TextStyle(
-          color: enabled ? Colors.white : Colors.white.withOpacity(0.65),
+          color: enabled ? const Color(0xFF0B1F45) : const Color(0xFF5C6B82),
         ),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Colors.white.withOpacity(0.75)),
+          labelStyle: const TextStyle(color: Color(0xFF5C6B82)),
           prefixIcon: Icon(icon, color: const Color(0xFF2EC4B6)),
           filled: true,
-          fillColor: Colors.white.withOpacity(enabled ? 0.06 : 0.03),
+          fillColor: enabled ? Colors.white : const Color(0xFFF5F7FB),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,
@@ -410,13 +424,13 @@ class EditGarageScreen extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide(
-              color: Colors.white.withOpacity(0.08),
+              color: const Color(0xFFE2E7F0),
             ),
           ),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide(
-              color: Colors.white.withOpacity(0.05),
+              color: const Color(0xFFE2E7F0),
             ),
           ),
           focusedBorder: OutlineInputBorder(

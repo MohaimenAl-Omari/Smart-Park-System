@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_park/controller/auth_controller.dart';
+import 'package:smart_park/controller/notifications_controller.dart';
 import 'package:smart_park/screen/car_owner/settings_screen.dart';
 import 'package:smart_park/screen/sharing/contact_us_screen.dart';
 import 'package:smart_park/screen/sharing/login_screen.dart';
+import 'package:smart_park/screen/sharing/notifications_screen.dart';
 import 'FavoriteGaragesScreen.dart';
 import 'find_garages_screen.dart';
 import 'my_reservations_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final AuthController authController;
+  late final NotificationsController _notifCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    authController = Get.find<AuthController>();
+    _notifCtrl = Get.put(NotificationsController(), tag: 'notif');
+    _notifCtrl.fetchNotifications();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +35,6 @@ class HomeScreen extends StatelessWidget {
     final w = mq.size.width;
     final h = mq.size.height;
     final theme = Theme.of(context);
-
-    final AuthController authController = Get.find();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -29,18 +45,59 @@ class HomeScreen extends StatelessWidget {
           'Smart Park'.tr,
           style: const TextStyle(
             fontWeight: FontWeight.w800,
-            color: Colors.white,
+            color: const Color(0xFF0B1F45),
           ),
         ),
         actions: [
+          // ── Notification bell with live unread badge ──────────────────
+          Obx(() {
+            final count = _notifCtrl.unreadCount.value;
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.notifications_outlined,
+                      color: Color(0xFF0B1F45)),
+                  onPressed: () async {
+                    await Get.to(() => const NotificationsScreen());
+                    // refresh badge when returning from notifications
+                    _notifCtrl.fetchNotifications();
+                  },
+                ),
+                if (count > 0)
+                  Positioned(
+                    right: 6,
+                    top: 6,
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: const BoxDecoration(
+                        color: Colors.redAccent,
+                        shape: BoxShape.circle,
+                      ),
+                      constraints:
+                          const BoxConstraints(minWidth: 17, minHeight: 17),
+                      child: Text(
+                        count > 99 ? '99+' : '$count',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+              ],
+            );
+          }),
           IconButton(
-            icon: const Icon(Icons.settings_outlined, color: Colors.white),
-            onPressed: () {
-              Get.to(() => SettingsScreen());
-            },
+            icon: const Icon(Icons.settings_outlined,
+                color: Color(0xFF0B1F45)),
+            onPressed: () => Get.to(() => SettingsScreen()),
           ),
           IconButton(
-            icon: const Icon(Icons.logout_rounded, color: Colors.white),
+            icon: const Icon(Icons.logout_rounded,
+                color: Color(0xFF0B1F45)),
             onPressed: () async {
               await authController.logout();
               Get.offAll(() => const LoginScreen());
@@ -54,9 +111,9 @@ class HomeScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0F2027),
-              Color(0xFF203A43),
-              Color(0xFF2C5364),
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -82,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Quick Actions'.tr,
                   style: theme.textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
+                    color: const Color(0xFF0B1F45),
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -150,21 +207,22 @@ class HomeScreen extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(w * 0.055),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(28),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
             const Color(0xFF2EC4B6).withOpacity(0.24),
-            Colors.white.withOpacity(0.08),
+            const Color(0xFFE2E7F0),
           ],
         ),
         border: Border.all(
-          color: Colors.white.withOpacity(0.14),
+          color: const Color(0xFFE2E7F0),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.18),
+            color: const Color(0xFF0B1F45).withOpacity(0.05),
             blurRadius: 18,
             offset: const Offset(0, 10),
           ),
@@ -194,7 +252,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   '${'Welcome'.tr}, $userName',
                   style: theme.textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
+                    color: const Color(0xFF0B1F45),
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -202,7 +260,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Reserve your parking spot quickly and manage your activities easily.'.tr,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.76),
+              color: Color(0xFF5C6B82),
                     fontSize: 14,
                     height: 1.5,
                   ),
@@ -240,21 +298,14 @@ class _ActionButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(w * 0.05),
         child: Ink(
           decoration: BoxDecoration(
+        color: Colors.white,
             borderRadius: BorderRadius.circular(w * 0.05),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.white.withOpacity(0.16),
-                Colors.white.withOpacity(0.07),
-              ],
-            ),
             border: Border.all(
-              color: Colors.white.withOpacity(0.14),
+              color: const Color(0xFFE2E7F0),
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.18),
+                color: const Color(0xFF0B1F45).withOpacity(0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 6),
               ),
@@ -286,7 +337,7 @@ class _ActionButton extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: Colors.white,
+              color: Color(0xFF0B1F45),
                         fontWeight: FontWeight.w800,
                         fontSize: w * 0.038 > 16 ? 16 : w * 0.038,
                       ),
@@ -297,7 +348,7 @@ class _ActionButton extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.72),
+              color: Color(0xFF5C6B82),
                         fontSize: w * 0.029 > 12 ? 12 : w * 0.029,
                         height: 1.25,
                       ),
@@ -309,7 +360,7 @@ class _ActionButton extends StatelessWidget {
                     Text(
                       'Open'.tr,
                       style: TextStyle(
-                        color: const Color(0xFF2EC4B6),
+              color: Color(0xFF2EC4B6),
                         fontWeight: FontWeight.w700,
                         fontSize: w * 0.03 > 12 ? 12 : w * 0.03,
                       ),

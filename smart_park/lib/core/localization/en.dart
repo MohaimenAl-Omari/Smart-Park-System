@@ -291,5 +291,151 @@ const Map<String, String> en = {
   "Total": "Total",
   "revenue": "Revenue",
   "Mobile":"Mobile" ,
-  "Mobile is required" : "Mobile is required"
+  "Mobile is required" : "Mobile is required",
+
+  // F4 - Garage details
+  "details": "Details",
+  "no_garage_data": "Garage information is not available",
+  "ratings": "Ratings",
+  "no_ratings_yet": "No ratings yet",
+  "refresh": "Refresh",
+
+  // F8 - Ratings
+  "rate_garage": "Rate Garage",
+  "leave_a_comment_optional": "Leave a comment (optional)",
+  "submit": "Submit",
+  "submitting": "Submitting...",
+  "rating_submitted_successfully": "Rating submitted successfully",
+
+  // F9 - Notifications
+  "notifications": "Notifications",
+  "no_notifications": "No notifications yet",
+  "mark_all_read": "Mark all as read",
+
+  // F10 - Report garage
+  "report_garage": "Report Garage",
+  "report_garage_subtitle":
+      "Tell us what is wrong with this garage and our team will review it.",
+  "submit_report": "Submit Report",
+  "report_submitted_successfully": "Report submitted successfully",
+
+  // F6 - Cancel rule
+  "cancel_window_closed":
+      "Cancellation window closed (less than 2 hours left)",
+
+  // F11 - Check in
+  "check_in": "Check In",
+  "checked_in_successfully": "Checked in successfully",
+
+  // Statistics
+  "total": "Total",
+  "total_revenue": "Total Revenue",
+  "reservations_breakdown": "Reservations Breakdown",
+
+  // Complete reservation
+  "mark_as_completed": "Mark as Completed",
+  "complete_reservation_confirm":
+      "Are you sure you want to mark this reservation as completed? The car owner will be notified and can then rate their experience.",
+  "no_pending_or_accepted": "No pending or accepted reservations",
+  "reservation_completed_successfully": "Reservation marked as completed",
+  "completed_reservations": "Completed",
+
+  // Mutual check-out
+  "check_out": "Check Out",
+  "checked_out_successfully": "Checked out successfully",
+
+  // Payment
+  "payment": "Payment",
+  "order_summary": "Order Summary",
+  "amount_due": "Amount Due",
+  "card_number": "Card Number",
+  "card_holder": "Card Holder",
+  "card_expiry": "Expiry (MM/YY)",
+  "card_cvv": "CVV",
+  "pay": "Pay",
+  "pay_and_reserve": "Pay & Reserve",
+  "processing": "Processing...",
+  "payment_successful": "Payment successful",
+  "payment_failed": "Payment failed. Use the demo card to test.",
+  "use_demo_card": "Use Demo Card",
+  "demo_card_banner":
+      "Demo mode: only the test card 4242 4242 4242 4242, 12/30, CVV 123 will succeed.",
+
+  // Payment method picker
+  "pay_with_card": "Card",
+  "pay_with_cash": "Cash",
+  "cash_on_arrival": "Pay with cash on arrival",
+  "cash_on_arrival_subtitle":
+      "Reserve now and pay the garage owner in cash when you arrive.",
+  "reserve_cash_payment": "Reserve & pay on arrival",
+  "cash_payment_reserved": "Reservation confirmed. Pay on arrival.",
+
+  // Garage photos
+  "garage_photos": "Garage Photos",
+  "manage_photos_subtitle": "Upload & manage garage photos",
+  "no_photos_yet": "No photos yet",
+  "tap_to_add_photos": "Tap the button above to add photos",
+  "add_photos": "Add Photos",
+  "photos_count": "Photos",
+  "delete_photo": "Delete Photo",
+  "delete_photo_confirm": "Are you sure you want to delete this photo?",
+  "delete": "Delete",
+  "photos_uploaded_successfully": "Photos uploaded successfully",
+  "photo_deleted": "Photo deleted",
+
+  // Garage services
+  "garage_services": "Garage Services",
+  "manage_services_subtitle": "Add services your garage offers",
+  "active_services": "Your Services",
+  "add_service": "Add a Service",
+  "custom_service": "Custom Service",
+  "custom_service_hint": "e.g. Motorbike parking",
+  "add": "Add",
+  "service_added": "Service added",
+  "service_removed": "Service removed",
+
+  // Booking form validation
+  "please_select_date": "Please select a reservation date",
+  "please_select_start_time": "Please select a start time",
+  "please_select_end_time": "Please select an end time",
+
+  // Phone number display on reservation cards
+  "garage_owner_phone": "Garage Owner Phone",
+  "car_owner_phone": "Car Owner Phone",
+
+  // Reservation screen redesign
+  "estimated_total": "Estimated Total",
+  "jod": "JOD",
+  "per_hour": "/ hr",
+  "select_date": "Select Date",
+  "select_time": "Select Time",
+  "duration": "Duration",
+  "hours": "hrs",
+  "proceed_to_payment": "Proceed to Payment",
+
+  // Payment method display (garage owner view)
+  "payment_method": "Payment Method",
+  "paid": "Paid",
+  "cash_pending": "Cash on Arrival",
+
+  // Booking screen step labels
+  "time": "Time",
+  "free": "Free",
+
+  // Notification timestamps
+  "just_now": "just now",
+  "ago": "ago",
+
+  // Favorites
+  "explore_garages_hint": "Start exploring garages and tap ♥ to save them",
+
+  // Logout confirmation
+  "logout_confirm_title": "Log Out",
+  "logout_confirm_message": "Are you sure you want to log out?",
+
+  // Rate dialog
+  "please_select_rating": "Please select a star rating",
+
+  // Find garages empty state
+  "try_different_search": "Try a different search term or city",
 };

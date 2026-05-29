@@ -164,7 +164,9 @@ class SettingsController extends GetxController {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
-
+    await prefs.remove('user');
+    await prefs.remove('role');
+    await prefs.remove('has_garage');
     Get.offAllNamed('/login');
   }
 

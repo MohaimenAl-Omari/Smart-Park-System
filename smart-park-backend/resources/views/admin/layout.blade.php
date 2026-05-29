@@ -160,6 +160,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('admin.reports.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active-link' : '' }}">
+                        Garage Reports
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('admin.contact.index') }}"
                         class="nav-link {{ request()->routeIs('admin.contact.*') ? 'active-link' : '' }}">
                         Contact Messages

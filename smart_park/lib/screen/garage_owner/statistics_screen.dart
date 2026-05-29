@@ -14,31 +14,30 @@ class StatisticsScreen extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: const Color(0xFF0F2027),
+      backgroundColor: const Color(0xFFF5F7FB),
 
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0B1F45),
-        foregroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF0B1F45),
+        elevation: 0.5,
         title: Text(
           'Statistics'.tr,
           style: const TextStyle(
             fontWeight: FontWeight.w800,
-            color: Colors.white,
+            color: const Color(0xFF0B1F45),
           ),
         ),
       ),
 
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: Color(0xFF2EC4B6)));
         }
 
         return SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(
             w * 0.05,
-            h * 0.12,
+            h * 0.025,
             w * 0.05,
             h * 0.03,
           ),
@@ -68,7 +67,7 @@ class StatisticsScreen extends StatelessWidget {
                       Text(
                         'Statistics'.tr,
                         style: const TextStyle(
-                          color: Colors.white,
+              color: Color(0xFF0B1F45),
                           fontSize: 20,
                           fontWeight: FontWeight.w900,
                         ),
@@ -77,14 +76,12 @@ class StatisticsScreen extends StatelessWidget {
                   ),
                   Icon(
                     Icons.analytics_outlined,
-                    color: Colors.white.withOpacity(0.7),
+                    color: const Color(0xFF5C6B82),
                   ),
                 ],
               ),
 
               const SizedBox(height: 14),
-
-              // GRID
               GridView.count(
                 crossAxisCount: 2,
                 shrinkWrap: true,
@@ -97,7 +94,7 @@ class StatisticsScreen extends StatelessWidget {
                     'total'.tr,
                     controller.total.value,
                     Icons.list_alt_rounded,
-                    Colors.white,
+                    const Color(0xFF2EC4B6),
                   ),
                   _statCard(
                     'pending'.tr,
@@ -123,12 +120,16 @@ class StatisticsScreen extends StatelessWidget {
                     Icons.block,
                     Colors.grey,
                   ),
+                  _statCard(
+                    'completed'.tr,
+                    controller.completed.value,
+                    Icons.task_alt,
+                    const Color(0xFF2EC4B6),
+                  ),
                 ],
               ),
 
               SizedBox(height: h * 0.025),
-
-              // Distribution summary strip
               _buildDistributionStrip(),
             ],
           ),
@@ -142,6 +143,7 @@ class StatisticsScreen extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.all(w * 0.06),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(30),
         gradient: const LinearGradient(
           colors: [
@@ -178,14 +180,14 @@ class StatisticsScreen extends StatelessWidget {
               children: [
                 Text(
                   'total_revenue'.tr,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.85),
+                  style: const TextStyle(
+                    color: Colors.white70,
                     fontSize: 14,
                   ),
                 ),
                 SizedBox(height: h * 0.008),
                 Obx(() => Text(
-                  "${controller.revenue.value} JOD",
+                  "${controller.revenue.value.toStringAsFixed(2)} JOD",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 26,
@@ -200,7 +202,7 @@ class StatisticsScreen extends StatelessWidget {
             padding:
             const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withOpacity(0.22),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -228,17 +230,12 @@ class StatisticsScreen extends StatelessWidget {
       String title, dynamic value, IconData icon, Color color) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        gradient: LinearGradient(
-          colors: [
-            Colors.white.withOpacity(0.16),
-            Colors.white.withOpacity(0.07),
-          ],
-        ),
-        border: Border.all(color: Colors.white.withOpacity(0.14)),
+        border: Border.all(color: const Color(0xFFE2E7F0)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.18),
+            color: const Color(0xFF0B1F45).withOpacity(0.05),
             blurRadius: 12,
             offset: const Offset(0, 6),
           ),
@@ -270,7 +267,7 @@ class StatisticsScreen extends StatelessWidget {
                       color: color,
                       shape: BoxShape.circle,
                       border: Border.all(
-                          color: const Color(0xFF0F2027), width: 1.5),
+                          color: const Color(0xFFF5F7FB), width: 1.5),
                     ),
                   ),
                 ),
@@ -282,7 +279,7 @@ class StatisticsScreen extends StatelessWidget {
               value.toString(),
               style: const TextStyle(
                 fontSize: 24,
-                color: Colors.white,
+                color: const Color(0xFF0B1F45),
                 fontWeight: FontWeight.w900,
               ),
             ),
@@ -298,9 +295,7 @@ class StatisticsScreen extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  color: color == Colors.white
-                      ? Colors.white.withOpacity(0.8)
-                      : color.withOpacity(0.9),
+                  color: color.withOpacity(0.9),
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
                 ),
@@ -318,6 +313,7 @@ class StatisticsScreen extends StatelessWidget {
       if (total == 0) return const SizedBox.shrink();
 
       final segments = [
+        _Seg(controller.completed.value, const Color(0xFF2EC4B6)),
         _Seg(controller.accepted.value, Colors.green),
         _Seg(controller.pending.value, Colors.orange),
         _Seg(controller.rejected.value, Colors.redAccent),
@@ -328,9 +324,9 @@ class StatisticsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'RESERVATIONS BREAKDOWN',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.4),
+            'reservations_breakdown'.tr.toUpperCase(),
+            style: const TextStyle(
+              color: Color(0xFF5C6B82),
               fontSize: 10,
               fontWeight: FontWeight.w700,
               letterSpacing: 1.5,
@@ -357,12 +353,15 @@ class StatisticsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Row(
+          Wrap(
+            spacing: 0,
+            runSpacing: 4,
             children: [
-              _dot(Colors.green, 'Accepted'),
-              _dot(Colors.orange, 'Pending'),
-              _dot(Colors.redAccent, 'Rejected'),
-              _dot(Colors.grey, 'Cancelled'),
+              _dot(const Color(0xFF2EC4B6), 'completed'.tr),
+              _dot(Colors.green, 'accepted'.tr),
+              _dot(Colors.orange, 'pending'.tr),
+              _dot(Colors.redAccent, 'rejected'.tr),
+              _dot(Colors.grey, 'cancelled'.tr),
             ],
           ),
         ],
@@ -382,8 +381,8 @@ class StatisticsScreen extends StatelessWidget {
               BoxDecoration(color: color, shape: BoxShape.circle)),
           const SizedBox(width: 4),
           Text(label,
-              style: TextStyle(
-                  color: Colors.white.withOpacity(0.45),
+              style: const TextStyle(
+                  color: Color(0xFF5C6B82),
                   fontSize: 10,
                   fontWeight: FontWeight.w500)),
         ],

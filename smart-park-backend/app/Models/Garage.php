@@ -21,6 +21,8 @@ class Garage extends Model
         'close_time',
         'description',
         'is_active',
+        'is_approved',
+        'approval_status',
     ];
 
     public static function createGarage(array $data, int $ownerId)
@@ -98,5 +100,35 @@ class Garage extends Model
     public function favoritedBy()
     {
         return $this->belongsToMany(User::class, 'favorites', 'garage_id', 'user_id')->withTimestamps();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(GarageImage::class, 'garage_id');
+    }
+
+    public function services()
+    {
+        return $this->hasMany(GarageService::class, 'garage_id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'garage_id');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'garage_id');
+    }
+
+    public function getAverageRatingAttribute(): float
+    {
+        return Rating::averageForGarage($this->id);
+    }
+
+    public function getRatingsCountAttribute(): int
+    {
+        return Rating::countForGarage($this->id);
     }
 }

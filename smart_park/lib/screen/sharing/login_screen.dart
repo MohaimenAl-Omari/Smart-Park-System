@@ -102,51 +102,22 @@ class _LoginScreenState extends State<LoginScreen> {
     final logoSize = w * 0.2 > 82 ? 82.0 : w * 0.2;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF06152E),
-                  Color(0xFF0B1F45),
-                  Color(0xFF0C3D68),
-                ],
-              ),
-            ),
+      backgroundColor: const Color(0xFFF5F7FB),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFF5F7FB),
+              Colors.white,
+              Color(0xFFEFF3F8),
+            ],
           ),
-          Positioned(
-            top: -h * 0.08,
-            right: -w * 0.12,
-            child: _GlowCircle(
-              size: w * 0.5,
-              color: const Color(0xFF2EC4B6),
-              opacity: 0.16,
-            ),
-          ),
-          Positioned(
-            top: h * 0.22,
-            left: -w * 0.14,
-            child: _GlowCircle(
-              size: w * 0.42,
-              color: const Color(0xFF4DA3FF),
-              opacity: 0.14,
-            ),
-          ),
-          Positioned(
-            bottom: -h * 0.07,
-            right: -w * 0.08,
-            child: _GlowCircle(
-              size: w * 0.56,
-              color: const Color(0xFF00D4FF),
-              opacity: 0.1,
-            ),
-          ),
-          SafeArea(
+        ),
+        child: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -159,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: logoSize,
                       height: logoSize,
                       decoration: BoxDecoration(
+        color: Colors.white,
                         borderRadius: BorderRadius.circular(w * 0.06),
                         gradient: const LinearGradient(
                           begin: Alignment.topLeft,
@@ -170,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.24),
+                            color: const Color(0xFF0B1F45).withOpacity(0.05),
                             blurRadius: 26,
                             offset: Offset(0, h * 0.014),
                           ),
@@ -178,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: Icon(
                         Icons.local_parking_rounded,
-                        color: Colors.white,
+                        color: const Color(0xFF0B1F45),
                         size: logoSize * 0.52,
                       ),
                     ),
@@ -187,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Smart Park'.tr,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.headlineMedium?.copyWith(
-                        color: Colors.white,
+                        color: const Color(0xFF0B1F45),
                         fontWeight: FontWeight.w800,
                         fontSize: w * 0.075 > 32 ? 32 : w * 0.075,
                       ),
@@ -199,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Reserve your parking spot before you arrive.'.tr,
                         textAlign: TextAlign.center,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withOpacity(0.74),
+                          color: const Color(0xFF5C6B82),
                           height: 1.5,
                           fontSize: w * 0.038 > 16 ? 16 : w * 0.038,
                         ),
@@ -213,16 +185,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         vertical: h * 0.025,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(cardRadius),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.14),
+                          color: const Color(0xFFE2E7F0),
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 30,
-                            offset: Offset(0, h * 0.015),
+                            color: const Color(0xFF0B1F45).withOpacity(0.06),
+                            blurRadius: 24,
+                            offset: Offset(0, h * 0.012),
                           ),
                         ],
                       ),
@@ -232,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             'Welcome back'.tr,
                             style: theme.textTheme.titleLarge?.copyWith(
-                              color: Colors.white,
+                              color: const Color(0xFF0B1F45),
                               fontWeight: FontWeight.w800,
                               fontSize: w * 0.06 > 26 ? 26 : w * 0.06,
                             ),
@@ -241,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             'Log in to find nearby garages and book a spot in seconds.'.tr,
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: Colors.white.withOpacity(0.72),
+                              color: const Color(0xFF5C6B82),
                               height: 1.45,
                             ),
                           ),
@@ -284,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       _obscurePassword
                                           ? Icons.visibility_off_outlined
                                           : Icons.visibility_outlined,
-                                      color: Colors.white.withOpacity(0.8),
+                                      color: const Color(0xFF5C6B82),
                                     ),
                                   ),
                                   validator: (v) {
@@ -323,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       _errorMsg!,
                                       style: theme.textTheme.bodyMedium?.copyWith(
-                                        color: Colors.white,
+                                        color: const Color(0xFF0B1F45),
                                         height: 1.4,
                                       ),
                                     ),
@@ -337,6 +309,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: buttonHeight,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
+        color: Colors.white,
                                 borderRadius: BorderRadius.circular(w * 0.045),
                                 gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
@@ -370,13 +343,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: w * 0.06,
                                   child: const CircularProgressIndicator(
                                     strokeWidth: 2.4,
-                                    color: Colors.white,
+                                    color: const Color(0xFF0B1F45),
                                   ),
                                 )
                                     : Text(
                                   'Login'.tr,
                                   style: TextStyle(
-                                    color: Colors.white,
+              color: Color(0xFF0B1F45),
                                     fontWeight: FontWeight.w800,
                                     fontSize: w * 0.043 > 18 ? 18 : w * 0.043,
                                     letterSpacing: 0.3,
@@ -397,7 +370,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
 
                             style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
+                              foregroundColor: const Color(0xFF0B1F45),
                               padding: EdgeInsets.symmetric(vertical: h * 0.01),
                             ),
                             child: RichText(
@@ -406,7 +379,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextSpan(
                                     text: 'Don’t have an account? '.tr,
                                     style: TextStyle(
-                                      color: Colors.white.withOpacity(0.72),
+              color: Color(0xFF5C6B82),
                                       fontSize: w * 0.037 > 15 ? 15 : w * 0.037,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -414,7 +387,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   TextSpan(
                                     text: 'Sign Up'.tr,
                                     style: TextStyle(
-                                      color: const Color(0xFF7DEBFF),
+              color: Color(0xFF2EC4B6),
                                       fontSize: w * 0.037 > 15 ? 15 : w * 0.037,
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -434,11 +407,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               );
                             },
-                            icon: const Icon(Icons.support_agent, color: Colors.white70),
+                            icon: const Icon(Icons.support_agent, color: const Color(0xFF5C6B82)),
                             label: Text(
                               'Contact Us'.tr,
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.85),
+              color: Color(0xFF5C6B82),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -451,7 +424,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       '© ${DateTime.now().year} Smart Park • Parking made simple'.tr,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.5),
+                        color: const Color(0xFF5C6B82),
                         fontSize: w * 0.032 > 13 ? 13 : w * 0.032,
                       ),
                     ),
@@ -461,9 +434,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      );
   }
 }
 
@@ -500,7 +472,7 @@ class _PremiumTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       style: TextStyle(
-        color: Colors.white,
+              color: Color(0xFF0B1F45),
         fontSize: w * 0.038 > 16 ? 16 : w * 0.038,
         fontWeight: FontWeight.w500,
       ),
@@ -509,20 +481,20 @@ class _PremiumTextField extends StatelessWidget {
         labelText: label,
         hintText: hint,
         labelStyle: TextStyle(
-          color: Colors.white.withOpacity(0.86),
+              color: Color(0xFF5C6B82),
           fontWeight: FontWeight.w600,
         ),
-        hintStyle: TextStyle(
-          color: Colors.white.withOpacity(0.45),
+        hintStyle: const TextStyle(
+          color: Color(0xFFADB5BD),
         ),
         prefixIcon: Icon(
           prefixIcon,
-          color: Colors.white.withOpacity(0.85),
+          color: const Color(0xFF5C6B82),
           size: w * 0.055,
         ),
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: Colors.white.withOpacity(0.08),
+        fillColor: const Color(0xFFF5F7FB),
         contentPadding: EdgeInsets.symmetric(
           horizontal: w * 0.035,
           vertical: h * 0.018,
@@ -530,7 +502,7 @@ class _PremiumTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(w * 0.045),
           borderSide: BorderSide(
-            color: Colors.white.withOpacity(0.12),
+            color: const Color(0xFFE2E7F0),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -553,33 +525,9 @@ class _PremiumTextField extends StatelessWidget {
           ),
         ),
         errorStyle: theme.textTheme.bodySmall?.copyWith(
-          color: Colors.white,
+          color: const Color(0xFF0B1F45),
           fontSize: w * 0.031 > 13 ? 13 : w * 0.031,
         ),
-      ),
-    );
-  }
-}
-
-class _GlowCircle extends StatelessWidget {
-  const _GlowCircle({
-    required this.size,
-    required this.color,
-    required this.opacity,
-  });
-
-  final double size;
-  final Color color;
-  final double opacity;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color.withOpacity(opacity),
       ),
     );
   }

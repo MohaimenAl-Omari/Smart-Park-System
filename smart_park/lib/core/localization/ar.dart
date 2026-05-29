@@ -283,7 +283,144 @@ const Map<String, String> ar = {
   "city": "المدينة",
   "Total": "الإجمالي",
   "total_revenue": "الأرباح",
+  "reservations_breakdown": "توزيع الحجوزات",
   "Mobile":"الهاتف" ,
   "Mobile is required" : "يرجى أدخال رقم الهاتف",
 
+  "details": "التفاصيل",
+  "no_garage_data": "معلومات الكراج غير متوفرة",
+  "ratings": "التقييمات",
+  "no_ratings_yet": "لا توجد تقييمات بعد",
+  "refresh": "تحديث",
+
+  "rate_garage": "قيّم الكراج",
+  "leave_a_comment_optional": "اترك تعليقًا (اختياري)",
+  "submit": "إرسال",
+  "submitting": "جاري الإرسال...",
+  "rating_submitted_successfully": "تم إرسال التقييم بنجاح",
+
+  "notifications": "الإشعارات",
+  "no_notifications": "لا توجد إشعارات بعد",
+  "mark_all_read": "تحديد الكل كمقروء",
+
+  "report_garage": "تبليغ عن الكراج",
+  "report_garage_subtitle":
+      "أخبرنا بالمشكلة الموجودة في هذا الكراج وسيقوم فريقنا بمراجعتها.",
+  "submit_report": "إرسال التبليغ",
+  "report_submitted_successfully": "تم إرسال التبليغ بنجاح",
+  "cancel_window_closed": "انتهت فترة الإلغاء (أقل من ساعتين متبقية)",
+
+  "check_in": "تسجيل الوصول",
+  "checked_in_successfully": "تم تسجيل الوصول بنجاح",
+
+  "total": "الإجمالي",
+  "revenue": "الأرباح",
+  "statistics": "الإحصائيات",
+
+
+  "mark_as_completed": "تحديد كمكتمل",
+  "complete_reservation_confirm":
+      "هل أنت متأكد من تحديد هذا الحجز كمكتمل؟ سيتم إشعار صاحب السيارة ويمكنه بعد ذلك تقييم تجربته.",
+  "no_pending_or_accepted": "لا توجد حجوزات معلقة أو مقبولة",
+  "reservation_completed_successfully": "تم تحديد الحجز كمكتمل بنجاح",
+  "completed_reservations": "مكتملة",
+
+  // تسجيل الخروج
+  "check_out": "تسجيل الخروج",
+  "checked_out_successfully": "تم تسجيل الخروج بنجاح",
+
+  // الدفع
+  "payment": "الدفع",
+  "order_summary": "ملخص الطلب",
+  "amount_due": "المبلغ المستحق",
+  "card_number": "رقم البطاقة",
+  "card_holder": "اسم حامل البطاقة",
+  "card_expiry": "تاريخ الانتهاء (MM/YY)",
+  "card_cvv": "رمز الأمان CVV",
+  "pay": "ادفع",
+  "pay_and_reserve": "ادفع واحجز",
+  "processing": "جاري المعالجة...",
+  "payment_successful": "تم الدفع بنجاح",
+  "payment_failed": "فشلت عملية الدفع. استخدم بطاقة التجربة.",
+  "use_demo_card": "استخدام بطاقة التجربة",
+  "demo_card_banner":
+      "وضع تجريبي: فقط البطاقة 4242 4242 4242 4242 وتاريخ 12/30 ورمز 123 سيُقبل.",
+
+  // اختيار طريقة الدفع
+  "pay_with_card": "بطاقة",
+  "pay_with_cash": "نقداً",
+  "cash_on_arrival": "ادفع نقداً عند الوصول",
+  "cash_on_arrival_subtitle":
+      "احجز الآن وادفع لصاحب الكراج نقداً عند وصولك.",
+  "reserve_cash_payment": "احجز وادفع عند الوصول",
+  "cash_payment_reserved": "تم تأكيد الحجز. ادفع عند الوصول.",
+
+  // صور الكراج
+  "garage_photos": "صور الكراج",
+  "manage_photos_subtitle": "رفع وإدارة صور الكراج",
+  "no_photos_yet": "لا توجد صور بعد",
+  "tap_to_add_photos": "اضغط الزر أعلاه لإضافة صور",
+  "add_photos": "إضافة صور",
+  "photos_count": "الصور",
+  "delete_photo": "حذف الصورة",
+  "delete_photo_confirm": "هل أنت متأكد من حذف هذه الصورة؟",
+  "delete": "حذف",
+  "photos_uploaded_successfully": "تم رفع الصور بنجاح",
+  "photo_deleted": "تم حذف الصورة",
+
+  // خدمات الكراج
+  "garage_services": "خدمات الكراج",
+  "manage_services_subtitle": "أضف الخدمات التي يوفرها كراجك",
+  "active_services": "خدماتك الحالية",
+  "add_service": "إضافة خدمة",
+  "custom_service": "خدمة مخصصة",
+  "custom_service_hint": "مثال: موقف دراجات نارية",
+  "add": "إضافة",
+  "service_added": "تمت إضافة الخدمة",
+  "service_removed": "تمت إزالة الخدمة",
+
+  // التحقق من نموذج الحجز
+  "please_select_date": "الرجاء اختيار تاريخ الحجز",
+  "please_select_start_time": "الرجاء اختيار وقت البدء",
+  "please_select_end_time": "الرجاء اختيار وقت الانتهاء",
+
+  // عرض أرقام الهاتف في بطاقات الحجز
+  "garage_owner_phone": "هاتف صاحب الكراج",
+  "car_owner_phone": "هاتف صاحب السيارة",
+
+  // إعادة تصميم شاشة الحجز
+  "estimated_total": "الإجمالي المتوقع",
+  "jod": "دينار",
+  "per_hour": "/ ساعة",
+  "select_date": "اختر التاريخ",
+  "select_time": "اختر الوقت",
+  "duration": "المدة",
+  "hours": "ساعات",
+  "proceed_to_payment": "المتابعة للدفع",
+
+  // طريقة الدفع (واجهة صاحب الكراج)
+  "payment_method": "طريقة الدفع",
+  "paid": "مدفوع",
+  "cash_pending": "نقد عند الوصول",
+
+  // تسميات خطوات شاشة الحجز
+  "time": "الوقت",
+  "free": "مجاني",
+
+  // طوابع وقت الإشعارات
+  "just_now": "الآن",
+  "ago": "مضت",
+
+  // المفضلة
+  "explore_garages_hint": "استكشف الكراجات واضغط ♥ لحفظها",
+
+  // تأكيد تسجيل الخروج
+  "logout_confirm_title": "تسجيل الخروج",
+  "logout_confirm_message": "هل أنت متأكد من تسجيل الخروج؟",
+
+  // تقييم الكراج
+  "please_select_rating": "الرجاء اختيار عدد النجوم",
+
+  // البحث عن كراجات
+  "try_different_search": "جرب كلمة بحث أو مدينة مختلفة",
 };
