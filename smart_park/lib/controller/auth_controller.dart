@@ -150,8 +150,7 @@ class AuthController extends GetxController {
         'password': password,
         'password_confirmation': confirmPassword,
         'role': role,
-        'mobile' : mobile
-
+        'phone': mobile,
       };
 
       if (role == 'car_owner' && carType != null && carType.isNotEmpty) {

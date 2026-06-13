@@ -110,8 +110,8 @@ class GaragePhotosScreen extends StatelessWidget {
                 itemCount: controller.photos.length,
                 itemBuilder: (context, index) {
                   final photo = controller.photos[index];
-                  final url = controller.photoUrl(
-                      photo['image_path']?.toString() ?? '');
+                  final url = photo['url']?.toString() ??
+                      controller.photoUrl(photo['image_path']?.toString() ?? '');
                   return _photoTile(url, photo['id'] as int);
                 },
               ),

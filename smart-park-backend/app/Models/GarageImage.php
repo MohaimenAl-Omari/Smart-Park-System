@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class GarageImage extends Model
 {
@@ -13,6 +14,13 @@ class GarageImage extends Model
         'garage_id',
         'image_path',
     ];
+
+    protected $appends = ['url'];
+
+    public function getUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->image_path);
+    }
 
     public function garage()
     {
